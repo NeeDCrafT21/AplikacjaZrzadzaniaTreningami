@@ -25,6 +25,7 @@ import android.widget.ListView;
 
 import com.czarnecki.myapplication.Models.PhotoItem;
 import com.czarnecki.myapplication.R;
+import com.czarnecki.myapplication.Service.MyDatabase;
 
 import java.io.File;
 import java.io.OutputStream;
@@ -80,6 +81,9 @@ public class ProgressActivity extends AppCompatActivity {
 
                             PhotoItem photoItem = new PhotoItem(imageUri, new Date());
                             PhotoItem.photoList.add(photoItem);
+                            MyDatabase database = MyDatabase.instanceOfDatabase(getApplicationContext());
+                            database.addPhotoItem(photoItem);
+
                             photoAdapter.notifyDataSetChanged();
                         }
                     }

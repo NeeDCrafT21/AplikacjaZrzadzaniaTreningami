@@ -12,10 +12,12 @@ import android.widget.Toast;
 
 import com.czarnecki.myapplication.Activities.AddNewWorkout.AddNewWorkoutActivity;
 import com.czarnecki.myapplication.Activities.Progress.ProgressActivity;
+import com.czarnecki.myapplication.Models.PhotoItem;
 import com.czarnecki.myapplication.Models.Workout;
 import com.czarnecki.myapplication.R;
 import com.czarnecki.myapplication.Service.ExercisesAPIService;
 import com.czarnecki.myapplication.Activities.Workout.WorkoutActivity;
+import com.czarnecki.myapplication.Service.MyDatabase;
 
 public class MainActivity extends AppCompatActivity {
     Button buttonAddWorkout;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("My workouts");
 
+        loadFromDatabase();
         workoutsListView = findViewById(R.id.list_workouts);
         setWorkoutAdapter();
         workoutsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
     private void setWorkoutAdapter() {
         workoutAdapter = new WorkoutAdapter(getApplicationContext(), Workout.workoutsList);
         workoutsListView.setAdapter(workoutAdapter);
+    }
+
+    private void loadFromDatabase() {
+        MyDatabase database = MyDatabase.instanceOfDatabase(this);
+        Workout.workoutsList.addAll(database.getAllWorkouts());
+        PhotoItem.photoList.addAll(database.getAllPhotoItems());
     }
 
     @Override

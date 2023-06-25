@@ -24,6 +24,7 @@ import com.czarnecki.myapplication.Models.ExerciseResponse;
 import com.czarnecki.myapplication.Models.Workout;
 import com.czarnecki.myapplication.R;
 import com.czarnecki.myapplication.Service.ExercisesAPIService;
+import com.czarnecki.myapplication.Service.MyDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +87,10 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Set workout name", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Workout.workoutsList.add(new Workout(id, name, exercisesList.size(), exercisesList));
+                Workout newWorkout = new Workout(id, name, exercisesList.size(), exercisesList);
+                Workout.workoutsList.add(newWorkout);
+                MyDatabase database = MyDatabase.instanceOfDatabase(getApplicationContext());
+                database.addWorkout(newWorkout);
                 finish();
             }
         });
