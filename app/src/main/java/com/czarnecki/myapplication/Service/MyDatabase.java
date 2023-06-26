@@ -43,6 +43,7 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public static MyDatabase instanceOfDatabase(Context context)
     {
+        //context.deleteDatabase(DATABASE_NAME);
         if(database == null)
             database = new MyDatabase(context);
 
