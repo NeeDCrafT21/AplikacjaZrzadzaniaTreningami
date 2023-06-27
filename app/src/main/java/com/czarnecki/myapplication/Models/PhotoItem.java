@@ -5,6 +5,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -30,5 +32,14 @@ public class PhotoItem {
     @Override
     public String toString() {
         return date.toString();
+    }
+
+    public static void sortPhotoList() {
+        PhotoItem.photoList.sort(new Comparator<PhotoItem>() {
+            @Override
+            public int compare(PhotoItem photo1, PhotoItem photo2) {
+                return photo2.getDate().compareTo(photo1.getDate());
+            }
+        });
     }
 }

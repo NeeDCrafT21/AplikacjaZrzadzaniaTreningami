@@ -107,8 +107,8 @@ public class MyDatabase extends SQLiteOpenHelper {
 
     public void removePhotoItem(PhotoItem photoItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String whereClause = COLUMN_ID + " = ?";
-        String[] whereArgs = {String.valueOf(photoItem.getDate())};
+        String whereClause = COLUMN_DATE + " = ?";
+        String[] whereArgs = {String.valueOf(photoItem.getDate().getTime())};
         db.delete(TABLE_PHOTO_ITEM, whereClause, whereArgs);
         db.close();
     }

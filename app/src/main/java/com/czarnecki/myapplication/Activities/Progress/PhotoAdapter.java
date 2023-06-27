@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.czarnecki.myapplication.Activities.Main.WorkoutAdapter;
 import com.czarnecki.myapplication.Models.PhotoItem;
+import com.czarnecki.myapplication.Models.Workout;
 import com.czarnecki.myapplication.R;
+import com.czarnecki.myapplication.Service.MyDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +42,7 @@ public class PhotoAdapter extends ArrayAdapter<PhotoItem> {
             viewHolder = new ViewHolder();
             viewHolder.imageView = view.findViewById(R.id.imageView);
             viewHolder.dateTextView = view.findViewById(R.id.dateTextView);
+            viewHolder.removeButton = view.findViewById(R.id.button_photo_remove);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -51,6 +56,16 @@ public class PhotoAdapter extends ArrayAdapter<PhotoItem> {
 
         // Set the date to the TextView
         viewHolder.dateTextView.setText(photoItem.getDate().toString());
+
+        viewHolder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDatabase database = MyDatabase.instanceOfDatabase(context);
+                PhotoItem.photoList.remove(photoItem);
+                database.removePhotoItem(photoItem);
+                PhotoAdapter.this.notifyDataSetChanged();
+            }
+        });
 
         return view;
     }
@@ -70,5 +85,6 @@ public class PhotoAdapter extends ArrayAdapter<PhotoItem> {
     private static class ViewHolder {
         ImageView imageView;
         TextView dateTextView;
+        Button removeButton;
     }
 }

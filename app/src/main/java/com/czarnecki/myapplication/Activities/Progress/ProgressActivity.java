@@ -26,6 +26,7 @@ import com.czarnecki.myapplication.Service.MyDatabase;
 
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Locale;
 
@@ -42,6 +43,8 @@ public class ProgressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_progress);
 
         photoListView = findViewById(R.id.photoListView);
+
+        PhotoItem.sortPhotoList();
 
         photoAdapter = new PhotoAdapter(this, PhotoItem.photoList);
         photoListView.setAdapter(photoAdapter);
@@ -87,6 +90,7 @@ public class ProgressActivity extends AppCompatActivity {
                             MyDatabase database = MyDatabase.instanceOfDatabase(getApplicationContext());
                             database.addPhotoItem(photoItem);
 
+                            PhotoItem.sortPhotoList();
                             photoAdapter.notifyDataSetChanged();
                         }
                     }
