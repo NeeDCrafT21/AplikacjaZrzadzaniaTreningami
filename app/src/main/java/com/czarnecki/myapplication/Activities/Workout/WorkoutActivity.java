@@ -56,7 +56,6 @@ public class WorkoutActivity extends AppCompatActivity {
         exercisesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),selectedWorkout.getExercisesList().get(position).getName(), Toast.LENGTH_SHORT).show();
                 showAddExercisePopupWindow(selectedWorkout.getExercisesList().get(position));
             }
         });
