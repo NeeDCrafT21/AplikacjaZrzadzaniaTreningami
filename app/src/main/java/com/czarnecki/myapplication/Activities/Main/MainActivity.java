@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadFromDatabase() {
-        MyDatabase database = MyDatabase.instanceOfDatabase(this);
+        MyDatabase database = MyDatabase.instanceOfDatabase(getApplicationContext());
         Workout.workoutsList.addAll(database.getAllWorkouts());
         PhotoItem.photoList.addAll(database.getAllPhotoItems());
     }

@@ -4,10 +4,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -19,7 +17,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -27,35 +24,41 @@ import com.czarnecki.myapplication.Models.PhotoItem;
 import com.czarnecki.myapplication.R;
 import com.czarnecki.myapplication.Service.MyDatabase;
 
-import java.io.File;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class ProgressActivity extends AppCompatActivity {
     private ActivityResultLauncher<Intent> takePictureLauncher;
     private PhotoAdapter photoAdapter;
     private ListView photoListView;
+    private Button captureButton;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-        Button btnCapture = findViewById(R.id.btnCapture);
         photoListView = findViewById(R.id.photoListView);
 
-        //photoList = new ArrayList<>();
         photoAdapter = new PhotoAdapter(this, PhotoItem.photoList);
         photoListView.setAdapter(photoAdapter);
 
-        btnCapture.setOnClickListener(new View.OnClickListener() {
+        captureButton = findViewById(R.id.btnCapture);
+        captureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePictureLauncher.launch(createTakePictureIntent());
+            }
+        });
+
+        backButton = findViewById(R.id.button_progress_back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

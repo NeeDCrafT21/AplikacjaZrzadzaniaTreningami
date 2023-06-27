@@ -97,6 +97,22 @@ public class MyDatabase extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void removeWorkout(Workout workout) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_ID + " = ?";
+        String[] whereArgs = {String.valueOf(workout.getId())};
+        db.delete(TABLE_WORKOUT, whereClause, whereArgs);
+        db.close();
+    }
+
+    public void removePhotoItem(PhotoItem photoItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_ID + " = ?";
+        String[] whereArgs = {String.valueOf(photoItem.getDate())};
+        db.delete(TABLE_PHOTO_ITEM, whereClause, whereArgs);
+        db.close();
+    }
+
     public List<Workout> getAllWorkouts() {
         List<Workout> workouts = new ArrayList<>();
 
