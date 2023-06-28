@@ -54,6 +54,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
     boolean muscleIsStart = true;
     private String chosenMuscle;
     private List<ExerciseResponse> apiExerciseList = new ArrayList<>();
+    Button exerciseAddButton;
 
     boolean temp = false;
 
@@ -239,9 +240,8 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
         });
 
         exerciseSpinner = view.findViewById(R.id.spinner_exercise);
-        addExercisesList();
 
-        Button exerciseAddButton = view.findViewById(R.id.button_exercise_add);
+        exerciseAddButton = view.findViewById(R.id.button_exercise_add);
         exerciseAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,6 +256,9 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
                 popupWindow.dismiss();
             }
         });
+        exerciseAddButton.setEnabled(false);
+
+        addExercisesList();
     }
 
     private void addExercisesList() {
@@ -264,12 +267,14 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
         }
         temp = true;
         apiExerciseList.clear();
+        exerciseAddButton.setEnabled(false);
         //Toast.makeText(getApplicationContext(),chosenDifficulty + chosenType + chosenMuscle, Toast.LENGTH_SHORT).show();
         exercisesAPIService.getExerciseListByTypeMuscleDifficulty(chosenType, chosenMuscle, chosenDifficulty, new ExercisesAPIService.ExerciseCallback() {
             @Override
             public void onSuccess(List<ExerciseResponse> exerciseList) {
                 apiExerciseList.addAll(exerciseList);
                 updateExerciseSpinner();
+                exerciseAddButton.setEnabled(true);
                 temp = false;
             }
 
