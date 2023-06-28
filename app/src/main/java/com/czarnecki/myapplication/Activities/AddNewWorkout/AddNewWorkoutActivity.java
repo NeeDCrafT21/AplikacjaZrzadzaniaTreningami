@@ -268,7 +268,7 @@ public class AddNewWorkoutActivity extends AppCompatActivity {
         temp = true;
         apiExerciseList.clear();
         exerciseAddButton.setEnabled(false);
-        //Toast.makeText(getApplicationContext(),chosenDifficulty + chosenType + chosenMuscle, Toast.LENGTH_SHORT).show();
+
         exercisesAPIService.getExerciseListByTypeMuscleDifficulty(chosenType, chosenMuscle, chosenDifficulty, new ExercisesAPIService.ExerciseCallback() {
             @Override
             public void onSuccess(List<ExerciseResponse> exerciseList) {

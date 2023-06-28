@@ -50,11 +50,9 @@ public class PhotoAdapter extends ArrayAdapter<PhotoItem> {
 
         PhotoItem photoItem = photoList.get(position);
 
-        // Set the image bitmap to the ImageView
         Bitmap imageBitmap = getBitmapFromUri(photoItem.getImageUri());
         viewHolder.imageView.setImageBitmap(imageBitmap);
 
-        // Set the date to the TextView
         viewHolder.dateTextView.setText(photoItem.getDate().toString());
 
         viewHolder.removeButton.setOnClickListener(new View.OnClickListener() {

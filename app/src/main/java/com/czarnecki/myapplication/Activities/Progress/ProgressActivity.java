@@ -65,14 +65,12 @@ public class ProgressActivity extends AppCompatActivity {
             }
         });
 
-        photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Handle item click if needed
-            }
-        });
+//        photoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            }
+//        });
 
-        // Initialize the activity result launcher
         takePictureLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -83,7 +81,7 @@ public class ProgressActivity extends AppCompatActivity {
                             Bundle extras = data.getExtras();
                             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-                            Uri imageUri = saveImageToGallery(imageBitmap); // Save the image to gallery and get its Uri
+                            Uri imageUri = saveImageToGallery(imageBitmap);
 
                             PhotoItem photoItem = new PhotoItem(imageUri, new Date());
                             PhotoItem.photoList.add(photoItem);
